@@ -1,2 +1,38 @@
-<p>details works!</p>
-<p>ID: {{id()}} </p>
+@if(flight()){
+    <div class="details-wrapper">
+        <mat-card class="details-card">
+            <mat-card-content>
+            <img [src]="utils.getImageUrl(flight()!)" class="details-image">
+        </mat-card-content>
+        </mat-card>
+        <mat-card class="details-card">
+        <mat-card-content>
+            <h1>{{flight()?.destination}}</h1>
+            <mat-list>
+                <mat-list-item>
+                <mat-icon matListItemIcon>watch</mat-icon>
+                <div matListItemTitle>Scheduled at: </div>
+                <div matListItemLine>{{utils.formatDate(flight()!.scheduledAt)}}</div>
+                </mat-list-item>
+                <mat-list-item>
+                <mat-icon matListItemIcon>flight_takeoff</mat-icon>
+                <div matListItemTitle>Model :</div>
+                <div matListItemLine>{{flight()?.plane}}</div>
+                </mat-list-item>
+                <mat-list-item>
+                <mat-icon matListItemIcon>terminal</mat-icon>
+                <div matListItemTitle>Terminal :</div>
+                <div matListItemLine>{{flight()?.terminal}}</div>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+        </mat-card>
+    </div>
+    <mat-card class="map-card">
+        <mat-card-content>
+                <iframe width="100%" height="400" style="border: 0;" loading="lazy" allowfullscreen
+                [src]="getMapUrl(flight()!.destination)">
+                </iframe>
+        </mat-card-content>
+    </mat-card>
+}

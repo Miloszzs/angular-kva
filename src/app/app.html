@@ -1,13 +1,16 @@
 <mat-toolbar>
-  <span>Naziv aplikacije</span>
+  <span>
+  <strong>Naziv aplikacije</strong></span>
   <span class="spacer"></span>
-  <a routerLink="/" matButton>Home</a> 
-  <a routerLink="/about" matButton>About</a>
-    <button matButton [matMenuTriggerFor]="afterMenu">Korisnik</button>
+  <a routerLink="/" matButton><mat-icon fontIcon="home" />Home</a> 
+  <a routerLink="/about" matButton><mat-icon fontIcon="info" />About</a>
+    
+ <!-- <button matButton [matMenuTriggerFor]="afterMenu">Korisnik</button>
     <mat-menu #afterMenu="matMenu" xPosition="after">
     <button mat-menu-item>Item 1</button>
     <button mat-menu-item>Item 2</button>
     </mat-menu>
+  -->
 </mat-toolbar>
 <div class="wrapper">
     <router-outlet />

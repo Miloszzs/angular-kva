@@ -1,0 +1,21 @@
+.details-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.details-card {
+    width: 500px;
+}
+
+.map-card {
+    max-width: 1010px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.details-image {
+    max-width: 100%;
+}
