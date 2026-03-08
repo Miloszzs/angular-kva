@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import axios from 'axios';
 import { FlightModel } from '../../models/flight.model';
 import { Utils } from '../utils';
 import { MatCardModule } from '@angular/material/card';
@@ -9,10 +8,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { authService } from '../services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
+import { FlightService } from '../services/flight.service';
+import { Loading } from '../loading/loading';
 
 @Component({
   selector: 'app-details',
-  imports: [MatCardModule, MatListModule, MatIconModule, RouterModule, MatButtonModule],
+  imports: [MatCardModule, MatListModule, MatIconModule, RouterModule, MatButtonModule, Loading],
   templateUrl: './details.html',
   styleUrl: './details.css',
 })
@@ -23,7 +24,7 @@ export class Details {
   constructor(route: ActivatedRoute, public utils: Utils, private sanitizer: DomSanitizer) {
     route.params.subscribe(params=>{
       const id = params['id']
-      axios.get(`https://flight.pequla.com/api/flight/${id}`)
+      FlightService.getFlightById(id)
         .then(rsp=>this.flight.set(rsp.data))
     })
   }

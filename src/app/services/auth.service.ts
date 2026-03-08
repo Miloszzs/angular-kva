@@ -5,17 +5,18 @@ const ACTIVE = 'active'
 
 export class authService {
     static getUsers(): UserModel[] {
-        if(localStorage.getItem(USERS) == null){
-           localStorage.setItem(USERS, JSON.stringify([
-            {
+        const baseUser : UserModel = {
             email: 'user@example.com',
             password: 'user123',
             destination: 'Tivat',
             firstName: 'Example',
             lastName: 'User',
+            address: 'Moravska bb',
+            phone: '0611312664',
             orders: []
-           }
-        ]))    
+        }
+        if(localStorage.getItem(USERS) == null){
+           localStorage.setItem(USERS, JSON.stringify([baseUser]))    
         }
         return JSON.parse(localStorage.getItem(USERS)!)
     }
@@ -38,6 +39,20 @@ export class authService {
                 return u
             }
         }return null
+    }
+
+    static updateActiveUser(newUserData: UserModel) {
+        const users = this.getUsers()
+        for(let u of users){
+            if(u.email === localStorage.getItem(ACTIVE)){
+                u.firstName = newUserData.firstName
+                u.lastName = newUserData.lastName
+                u.address = newUserData.address
+                u.phone = newUserData.phone
+                u.destination = newUserData.destination
+            }
+        }
+        localStorage.setItem(USERS, JSON.stringify(users))
     }
 
     static logout() {
