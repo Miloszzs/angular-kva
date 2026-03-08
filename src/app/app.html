@@ -4,6 +4,15 @@
   <span class="spacer"></span>
   <a routerLink="/" matButton><mat-icon fontIcon="home" />Home</a> 
   <a routerLink="/about" matButton><mat-icon fontIcon="info" />About</a>
+
+   @if(AuthService.getActiveUser()) {
+    <a routerLink="/user" matButton><mat-icon fontIcon="admin_panel_settings" />Account</a>
+    <button matButton (click)="doLogout()">
+      <mat-icon fontIcon="logout" /> Logout 
+    </button>
+  } @else { 
+    <a routerLink="/login" matButton><mat-icon fontIcon="login" />Login</a>
+  }
     
  <!-- <button matButton [matMenuTriggerFor]="afterMenu">Korisnik</button>
     <mat-menu #afterMenu="matMenu" xPosition="after">

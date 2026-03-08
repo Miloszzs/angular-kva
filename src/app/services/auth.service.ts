@@ -6,14 +6,16 @@ const ACTIVE = 'active'
 export class authService {
     static getUsers(): UserModel[] {
         if(localStorage.getItem(USERS) == null){
-           localStorage.setItem(USERS, JSON.stringify({
+           localStorage.setItem(USERS, JSON.stringify([
+            {
             email: 'user@example.com',
             password: 'user123',
             destination: 'Tivat',
             firstName: 'Example',
             lastName: 'User',
             orders: []
-           }))    
+           }
+        ]))    
         }
         return JSON.parse(localStorage.getItem(USERS)!)
     }
@@ -23,8 +25,10 @@ export class authService {
         for(let u of users){
             if(u.email === email && u.password === password) {
                 localStorage.setItem(ACTIVE, email)
+                return true
             }
         }
+        return false
     }
 
     static getActiveUser(): UserModel | null {
@@ -34,5 +38,9 @@ export class authService {
                 return u
             }
         }return null
+    }
+
+    static logout() {
+        localStorage.removeItem(ACTIVE)
     }
 }
